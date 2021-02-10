@@ -63,9 +63,9 @@ export interface IFlowChartProps {
   config?: IConfig
 }
 
-export const FlowChart = (props: IFlowChartProps) => {
-  const [ canvasSize, setCanvasSize ] = React.useState<{ width: number, height: number }>({ width: 0, height: 0 })
+const noop = () => {};
 
+export const FlowChart = (props: IFlowChartProps) => {
   const {
     chart,
     callbacks: {
@@ -102,38 +102,18 @@ export const FlowChart = (props: IFlowChartProps) => {
     } = {},
     config = {},
   } = props
-  const { links, nodes, selected, hovered, offset, scale } = chart
+  const { links, nodes, selected, hovered } = chart
 
   const canvasCallbacks = { onDragCanvas, onDragCanvasStop, onCanvasClick, onDeleteKey, onCanvasDrop, onZoomCanvas }
   const linkCallbacks = { onLinkMouseEnter, onLinkMouseLeave, onLinkClick }
   const nodeCallbacks = { onDragNode, onNodeClick, onDragNodeStop, onNodeMouseEnter, onNodeMouseLeave, onNodeSizeChange,onNodeDoubleClick }
   const portCallbacks = { onPortPositionChange, onLinkStart, onLinkMove, onLinkComplete, onLinkCancel }
 
-  const nodesInView = Object.keys(nodes).filter((nodeId) => {
-    const defaultNodeSize = { width: 500, height: 500 }
-
-    const { x, y } = nodes[nodeId].position
-    const size = nodes[nodeId].size || defaultNodeSize
-
-    const isTooFarLeft = scale * x + offset.x + scale * size.width < 0
-    const isTooFarRight = scale * x + offset.x > canvasSize.width
-    const isTooFarUp = scale * y + offset.y + scale * size.height < 0
-    const isTooFarDown = scale * y + offset.y > canvasSize.height
-    return !(isTooFarLeft || isTooFarRight || isTooFarUp || isTooFarDown)
-  })
+  const nodesInView = Object.keys(nodes)
 
   const matrix = config.smartRouting ? getMatrix(chart.offset, Object.values(nodesInView.map((nodeId) => nodes[nodeId]))) : undefined
 
-  const linksInView = Object.keys(links).filter((linkId) => {
-    const from = links[linkId].from
-    const to = links[linkId].to
-
-    return (
-      !to.nodeId ||
-      nodesInView.indexOf(from.nodeId) !== -1 ||
-      nodesInView.indexOf(to.nodeId) !== -1
-    )
-  })
+  const linksInView = Object.keys(links)
 
   return (
     <CanvasWrapper
@@ -142,7 +122,7 @@ export const FlowChart = (props: IFlowChartProps) => {
       scale={chart.scale}
       ComponentInner={CanvasInner}
       ComponentOuter={CanvasOuter}
-      onSizeChange={(width, height) => setCanvasSize({ width, height })}
+      onSizeChange={() => noop}
       {...canvasCallbacks}
     >
       { linksInView.map((linkId) => {
