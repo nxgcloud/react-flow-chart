@@ -1,6 +1,6 @@
 # React Flow Chart
 
-[![CircleCI](https://circleci.com/gh/MrBlenny/react-flow-chart.svg?style=svg)](https://circleci.com/gh/MrBlenny/react-flow-chart)
+[![build](https://github.com/nxgcloud/react-flow-chart/workflows/build/badge.svg?branch=master)](https://github.com/nxgcloud/react-flow-chart/packages)
 
 - [X] Dragabble Nodes and Canvas
 - [x] Create curved links between ports
@@ -24,7 +24,7 @@ This project aims to build a highly customisable, declarative flow chart library
 
 For example:
 
-![demo](./images/demo.gif)
+![demo](https://raw.githubusercontent.com/nxgcloud/react-flow-chart/master/images/demo.gif)
 
 ## Data Stucture
 
@@ -190,16 +190,16 @@ const Example = (
 ```
 
 ### With Internal State
-[stories/InternalReactState.tsx](./stories/InternalReactState.tsx)
+[stories/InternalReactState.tsx](https://github.com/nxgcloud/react-flow-chart/blob/master/stories/InternalReactState.tsx)
 
 ### With External State
-[stories/ExternalReactState.tsx](./stories/ExternalReactState.tsx)
+[stories/ExternalReactState.tsx](https://github.com/nxgcloud/react-flow-chart/blob/master/stories/ExternalReactState.tsx)
 
 ### Readonly Mode
-[stories/ReadonlyMode.tsx](./stories/ReadonlyMode.tsx)
+[stories/ReadonlyMode.tsx](https://github.com/nxgcloud/react-flow-chart/blob/master/stories/ReadonlyMode.tsx)
 
 ### Other Demos
-[stories/ExternalReactState.tsx](./stories)
+[stories/ExternalReactState.tsx](https://github.com/nxgcloud/react-flow-chart/blob/master/stories)
 
 
 ## Contributing
