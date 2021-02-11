@@ -63,7 +63,7 @@ export interface IFlowChartProps {
   config?: IConfig
 }
 
-const noop = () => {};
+const noop = () => undefined
 
 export const FlowChart = (props: IFlowChartProps) => {
   const {
