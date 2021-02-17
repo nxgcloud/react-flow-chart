@@ -11,6 +11,7 @@ export interface IConfig {
   validateLink?: (props: IOnLinkCompleteInput & { chart: IChart }) => boolean
   nodeProps?: any
   zoom?: IZoomConfig
+  virtualize?: boolean
   [key: string]: any
 }
 
