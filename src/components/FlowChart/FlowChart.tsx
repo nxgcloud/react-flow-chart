@@ -1,4 +1,6 @@
+import isEqual from 'fast-deep-equal'
 import * as React from 'react'
+import { useCustomCompareMemo } from 'use-custom-compare'
 import {
   CanvasInnerDefault, CanvasOuterDefault, CanvasWrapper, ICanvasInnerDefaultProps, ICanvasOuterDefaultProps, IChart, IConfig, ILink,
   ILinkDefaultProps, INodeDefaultProps, INodeInnerDefaultProps, IOnCanvasClick, IOnCanvasDrop, IOnDeleteKey, IOnDragCanvas,
@@ -104,7 +106,12 @@ export const FlowChart = (props: IFlowChartProps) => {
     } = {},
     config = {},
   } = props
-  const { links, nodes, selected, hovered, offset, scale } = chart
+  const { links, selected, hovered, offset, scale } = chart
+  const nodes = useCustomCompareMemo(
+      () => chart.nodes,
+      [chart.nodes],
+      (prevDeps, nextDeps) => isEqual(prevDeps, nextDeps),
+  )
 
   const canvasCallbacks = { onDragCanvas, onDragCanvasStop, onCanvasClick, onDeleteKey, onCanvasDrop, onZoomCanvas }
   const linkCallbacks = { onLinkMouseEnter, onLinkMouseLeave, onLinkClick }
@@ -127,7 +134,10 @@ export const FlowChart = (props: IFlowChartProps) => {
     })
   }
 
-  const matrix = config.smartRouting ? getMatrix(chart.offset, Object.values(nodesInView.map((nodeId) => nodes[nodeId]))) : undefined
+  const matrix = React.useMemo(
+      () => config.smartRouting ? getMatrix(chart.offset, Object.values(nodesInView.map((nodeId) => nodes[nodeId]))) : undefined,
+      [config.smartRouting, config.virtualize, nodesInView, nodes],
+  )
 
   let linksInView = Object.keys(links)
   if (config.virtualize) {
