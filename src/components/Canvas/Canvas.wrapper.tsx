@@ -129,7 +129,7 @@ export class CanvasWrapper extends React.Component<ICanvasWrapperProps, IState> 
                 tabIndex={0}
                 onKeyDown={(e: React.KeyboardEvent) => {
                   // delete or backspace keys
-                  if (e.keyCode === 46 || e.keyCode === 8) {
+                  if (e.key === 'Delete' || e.key === 'Backspace') {
                     onDeleteKey({ config })
                   }
                 }}
