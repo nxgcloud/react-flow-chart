@@ -1,4 +1,4 @@
-import isEqual from 'fast-deep-equal'
+import * as isEqual from 'fast-deep-equal'
 import * as React from 'react'
 import { useCustomCompareMemo } from 'use-custom-compare'
 import {
