@@ -1,6 +1,6 @@
 {
   "name": "@nxgcloud/react-flow-chart",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "A flexible, stateless flow chart library for react.",
   "main": "src/index.js",
   "repository": "https://github.com/nxgcloud/react-flow-chart.git",
